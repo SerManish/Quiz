@@ -2,12 +2,12 @@ const puppeteer = require('puppeteer');
 var fs = require('fs');
 
 (async () => {
-    var database = {"os":{},"dsa":{}}
+    var database = {"os":{},"coa":{}}
 
     const browser = await puppeteer.launch();
 
-    subjects = ["os","dsa"];
-    links = ["https://www.sanfoundry.com/operating-system-questions-answers/","https://www.sanfoundry.com/1000-data-structure-questions-answers/"]
+    subjects = ["os","coa"];
+    links = ["https://www.sanfoundry.com/operating-system-questions-answers/","https://www.sanfoundry.com/1000-computer-organization-architecture-questions-answers/"]
 
     for(let j=0;j<2;j++)
     {
@@ -21,7 +21,7 @@ var fs = require('fs');
         var data = {'easy':[],'medium':[],'hard':[]}
 
 
-        urls = [urls[0],urls[1]];                                 //remove this line for 3000+ questions
+        urls = urls.splice(0,5);                                 //remove this line for 3000+ questions
 
 
         // Scraping questions and answers 
@@ -57,7 +57,7 @@ var fs = require('fs');
         database[subjects[j]] = data;
     }
 
-    //writing to database.json(included in gitignore)
+    //writing to database.json
     fs.writeFile("database.json", JSON.stringify(database), err => 
         {
             if(err)

@@ -8,11 +8,11 @@ const readline = require('readline').createInterface({
 questionNumber = 0;
 maximumQuestions = 10;
 subject = 'os',difficulty = 'easy';
-subjects = ["os","dsa"], difficulties = ["easy","medium","hard"];
+subjects = ["os","coa"], difficulties = ["easy","medium","hard"];
 
 function chooseSubject()
 {
-    readline.question('Choose subject \n 1. Operating System\n 2. Data Structure and Algorithm \n Your Option : ', (input) => {
+    readline.question('Choose subject \n 1. Operating System\n 2. Computer Organization & Architecture \n Your Option : ', (input) => {
         questionNumber = 0;
         subject = subjects[parseInt(input)-1];
         chooseDifficulty();
