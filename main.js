@@ -9,6 +9,19 @@ questionNumber = 0;
 maximumQuestions = 10;
 subject = 'os',difficulty = 'easy';
 subjects = ["os","coa"], difficulties = ["easy","medium","hard"];
+questions = undefined;
+
+// Shuffles original array
+function shuffle ( myArray ) {
+    var i = myArray.length;
+    if ( i == 0 ) return false;
+    while ( --i ) {
+       var j = Math.floor( Math.random() * ( i + 1 ) );
+       var temp = myArray[i];
+       myArray[i] = myArray[j];
+       myArray[j] = temp;
+    }
+}
 
 function chooseSubject()
 {
@@ -23,6 +36,8 @@ function chooseDifficulty()
 {
     readline.question('Choose Difficulty \n1. Easy\n2. Medium\n3. Hard\nYour Option : ', (input) => {
         difficulty = difficulties[parseInt(input)-1];
+        questions = database[subject][difficulty];
+        shuffle(questions);
         displayQuestion();
     });
 }
@@ -31,12 +46,17 @@ function displayQuestion()
 {
     if(questionNumber<maximumQuestions)
     {
-        console.log("");
-        for(let i=0;i<5;i++)
-            console.log(database[subject][difficulty][questionNumber][i]);
-        readline.question('Choose the correct option : ',(input)=>{
-            for(let i=5;i<6;i++)
-                console.log(database[subject][difficulty][questionNumber][i]);
+        console.log(`\n(${questionNumber+1}) ${questions[questionNumber][0].slice(3)}`);
+        for(let j = 1; j < 5; j++){
+            console.log(questions[questionNumber][j]);
+        }
+
+        readline.question('Choose Correct Option: ', (answer) => {
+            console.log(`Correct ${questions[questionNumber][5]}\n`);
+            //if correct answer and explanation are not in single element
+            if(questions[questionNumber].length>6){
+                console.log(questions[questionNumber][6]+'\n');
+            }
             questionNumber++;
             checkIfWantToContinue();
         });
